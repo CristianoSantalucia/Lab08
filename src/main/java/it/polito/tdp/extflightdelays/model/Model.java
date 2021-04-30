@@ -1,12 +1,13 @@
 package it.polito.tdp.extflightdelays.model;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 import org.jgrapht.graph.DefaultWeightedEdge;
-import org.jgrapht.graph.SimpleWeightedGraph;
 
 import it.polito.tdp.extflightdelays.db.ExtFlightDelaysDAO;
 
@@ -22,7 +23,7 @@ public class Model
 	public StringBuilder creaGrafoFabio(long distMin)
 	{
 		StringBuilder s = new StringBuilder();
-		//vertice = aeroporto
+
 		Graph<Airport, DefaultWeightedEdge> fabio = new DefaultUndirectedWeightedGraph<>(DefaultWeightedEdge.class);
 		
 		//aggiunge vertici 
@@ -42,7 +43,12 @@ public class Model
 		s.append(fabio.vertexSet().size());
 		s.append("\nTOT EDEGES: ");
 		s.append(fabio.edgeSet().size());
+		s.append("\n");
 		
+		List<FabioVolo> lista = new ArrayList<>(dao.getFlightsSet(distMin));
+		Collections.sort(lista);
+		for (FabioVolo f : lista)
+			s.append(f);
 		return s;
 	}
 }

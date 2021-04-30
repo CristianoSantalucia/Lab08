@@ -1,6 +1,6 @@
 package it.polito.tdp.extflightdelays.model;
 
-public class FabioVolo
+public class FabioVolo implements Comparable<FabioVolo>
 {
 	private long origin, destination;
 	private double distance;
@@ -47,6 +47,12 @@ public class FabioVolo
 	}
 	@Override public String toString()
 	{
-		return origin + " " + destination + " " + distance;
+		return origin + " " + destination + " " + distance + "\n";
+	}
+	
+	
+	@Override public int compareTo(FabioVolo e2)
+	{
+		return (int) (this.origin - e2.origin) == 0 ? (int) (this.destination - e2.destination) : (int) (this.origin - e2.origin);
 	}
 }

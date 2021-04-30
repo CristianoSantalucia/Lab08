@@ -1,6 +1,7 @@
 package it.polito.tdp.extflightdelays.model;
 
-public class Airport {
+public class Airport
+{
 	
 	private int id;
 	private String iataCode;
@@ -13,10 +14,8 @@ public class Airport {
 	private Double timezoneOffset;
 	
 	public Airport()
-	{
-		
-	};
-	
+	{};
+
 	public Airport(int id, String iataCode, String airportName, String city, String state, String country,
 			Double latitude, Double longitude, Double timezoneOffset) {
 		this.id = id;
