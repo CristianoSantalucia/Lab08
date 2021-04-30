@@ -19,8 +19,9 @@ public class Model
 		dao = new ExtFlightDelaysDAO();
 	}
 	
-	public void creaGrafoFabio(long distMin)
+	public StringBuilder creaGrafoFabio(long distMin)
 	{
+		StringBuilder s = new StringBuilder();
 		//vertice = aeroporto
 		Graph<Airport, DefaultWeightedEdge> fabio = new DefaultUndirectedWeightedGraph<>(DefaultWeightedEdge.class);
 		
@@ -37,7 +38,11 @@ public class Model
 			Graphs.addEdge(fabio,origin,dest,f.getDistance());
 		}
 		
-		System.out.println(fabio.vertexSet().size());
-		System.out.println(fabio.edgeSet().size());
+		s.append("TOT VERTICES: ");
+		s.append(fabio.vertexSet().size());
+		s.append("\nTOT EDEGES: ");
+		s.append(fabio.edgeSet().size());
+		
+		return s;
 	}
 }
