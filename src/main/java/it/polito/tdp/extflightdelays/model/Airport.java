@@ -12,6 +12,11 @@ public class Airport {
 	private Double longitude;
 	private Double timezoneOffset;
 	
+	public Airport()
+	{
+		
+	};
+	
 	public Airport(int id, String iataCode, String airportName, String city, String state, String country,
 			Double latitude, Double longitude, Double timezoneOffset) {
 		this.id = id;
