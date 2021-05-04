@@ -27,10 +27,10 @@ public class Model
 		Graph<Airport, DefaultWeightedEdge> fabio = new DefaultUndirectedWeightedGraph<>(DefaultWeightedEdge.class);
 		
 		//aggiunge vertici 
-		Graphs.addAllVertices(fabio, dao.loadAllAirports());
+		Graphs.addAllVertices(fabio, dao.loadAllAirports());  
 		
 		//aggiunge edges
-		for (FabioVolo f : dao.getFlightsSet(distMin))
+		for (FabioVolo f : dao.getVoliSet(distMin))
 		{
 			Airport origin = new Airport();
 			Airport dest = new Airport();

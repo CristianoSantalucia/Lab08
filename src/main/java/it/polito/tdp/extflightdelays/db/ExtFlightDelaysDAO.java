@@ -21,7 +21,41 @@ import it.polito.tdp.extflightdelays.model.FabioVolo;
 import it.polito.tdp.extflightdelays.model.Flight;
 
 public class ExtFlightDelaysDAO
-{ 	
+{ 		
+		public Set<FabioVolo> getVoliSet(long distMin)
+		{
+			Set<FabioVolo> set = new HashSet<>();
+			
+			String sql =  "SELECT f1.ORIGIN_AIRPORT_ID AS originId, "
+						+ "f1.DESTINATION_AIRPORT_ID AS destinationId,  "
+						+ "AVG(f1.DISTANCE) AS distance "
+						+ "FROM flights AS f1     "
+						+ "GROUP BY originId, destinationId "
+						+ "HAVING distance > ? "
+						+ "ORDER BY f1.ORIGIN_AIRPORT_ID  ";
+			
+			try
+			{
+				Connection conn = ConnectDB.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setLong(1, distMin);
+				ResultSet rs = st.executeQuery();
+				
+				while (rs.next())
+				{
+					 FabioVolo f = new FabioVolo(rs.getLong("originId"), rs.getLong("destinationId"), rs.getDouble("distance"));
+					 set.add(f);
+				}
+				
+				return set ;
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				return null;
+			}
+		}
+	
 	public Set<FabioVolo> getFlightsSet()
 	{
 		Set<FabioVolo> set = new HashSet<>();
